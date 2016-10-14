@@ -26,7 +26,7 @@ window.onload = function(evt) {
 		for (var i = 0; i < N; i++) {
 			x = parseInt(Math.random() * stage.width, 10);
 			y = parseInt(Math.random() * stage.height, 10);
-			if (curve.isPointInside(x, y, curve)) {
+			if (curve.isPointInside(x, y)) {
 				n++;
 			}
 		}
