@@ -6,7 +6,7 @@ window.onload = function(evt) {
 	console.log(canv);
 	stage = new Candy.Stage(canv);
 	console.log(stage);
-	canv.onmousedown = function(e) {
+	canv.onmousedown = canv.ontouchstart = function(e) {
 		curve = new Curve(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
 		rc = Candy.randomColor();
 		if (rc in colors){
@@ -18,7 +18,7 @@ window.onload = function(evt) {
 		moveTo(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
 		mouseDown = true;
 	};
-	canv.onmouseup = function(e) {
+	canv.onmouseup = canv.ontouchend = function(e) {
 		var x, y, n = 0, span;
 		curve.close();
 		stage.context.closePath();
@@ -41,7 +41,7 @@ window.onload = function(evt) {
 		TABLEinfo.rows[curves.length].cells[1].innerHTML = n/N;
 		TABLEinfo.rows[curves.length].insertCell(2);
 	};
-	canv.onmousemove = function(e) {
+	canv.onmousemove = canv.ontouchmove = function(e) {
 		if (mouseDown) {
 			curve.addPoint(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
 			stage.context.lineTo(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
