@@ -3,10 +3,9 @@ var canv, mouseDown = false, N = 1e6, curves = [], rc, colors = [], stage,
 
 window.onload = function(evt) {
 	canv = document.querySelector("#canv");
-	console.log(canv);
 	stage = new Candy.Stage(canv);
-	console.log(stage);
-	canv.onmousedown = canv.ontouchstart = function(e) {
+	canv.onmousedown = function(e) {
+		console.log(e.pageX, this.offsetLeft);
 		curve = new Curve(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
 		rc = Candy.randomColor();
 		if (rc in colors){
@@ -18,7 +17,7 @@ window.onload = function(evt) {
 		moveTo(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
 		mouseDown = true;
 	};
-	canv.onmouseup = canv.ontouchend = function(e) {
+	canv.onmouseup = function(e) {
 		var x, y, n = 0, span;
 		curve.close();
 		stage.context.closePath();
@@ -41,12 +40,12 @@ window.onload = function(evt) {
 		TABLEinfo.rows[curves.length].cells[1].innerHTML = n/N;
 		TABLEinfo.rows[curves.length].insertCell(2);
 	};
-	canv.onmousemove = canv.ontouchmove = function(e) {
+	canv.onmousemove = function(e) {
 		if (mouseDown) {
 			curve.addPoint(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
 			stage.context.lineTo(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
 			stage.context.stroke();
-		} else {
+		} else if (e.touch !== true){
 			for (var i = 0; i < curves.length; i++) {
 				TABLEinfo.rows[i+1].cells[2].innerHTML = 
 (curves[i].isPointInside(e.pageX - this.offsetLeft, e.pageY - this.offsetTop)) ? "Inside" : "Outside";
@@ -54,5 +53,18 @@ window.onload = function(evt) {
 		}
 		document.querySelector("#coox").innerHTML = e.pageX - this.offsetLeft;
 		document.querySelector("#cooy").innerHTML = e.pageY - this.offsetTop;
+	};
+	canv.ontouchstart = function(e) {
+		try {
+			document.querySelector("#info").rows[0].deleteCell(2);
+		} catch(e) {
+		}
+		canv.onmousedown({pageX: e.touches[0].pageX, pageY: e.touches[0].pageY, touch: true});
+	};
+	canv.ontouchmove = function(e) {
+		canv.onmousemove({pageX: e.touches[0].pageX, pageY: e.touches[0].pageY, touch: true});
+	};
+	canv.ontouchend = function(e) {
+		canv.onmouseup({pageX: e.touches[0].pageX, pageY: e.touches[0].pageY, touch: true});
 	};
 };
