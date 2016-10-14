@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang='en' xml:lang='en' xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">	
+	<title>MC Demo 1</title>
+	<script type="text/javascript" src="js/Candy.js"></script>
+	<script type="text/javascript" src="js/Curve.js"></script>
+	<script type="text/javascript" src="js/main1.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body>
+	<div id="wrapper">
+		<article>
+		
+			<header>
+				<h1>Monte Carlo Methods - Demo 1</h1>
+			</header>
+			
+			<section>
+				<h2>Estimating the value of &pi;</h2>
+				<div class="leftFloat">
+					<span>The square (400x400 pixels) is considered to be a unit square</span>
+					<div id="candiv">
+						<canvas id="canv" width="400" height="400"></canvas>
+					</div>
+				</div>
+				<div>
+					<br><br><br>
+					<div>
+						<button type="button" id="est">Start</button>
+						<button type="button" id="stop">Stop</button>
+						<div id="data">
+							Total Number of Random Points: <span id="noN"></span> <br>
+							Number of points inside the curve: <span id="nop"></span> <br>
+							&pi; &asymp; <span id="pi"></span> <br>
+						</div>
+					</div>
+				</div>
+			</section>
+			
+			<footer>
+				Copyright &#0169; 2016, K Sannidhya Shukla <br>
+				ALL RIGHTS RESERVED
+			</footer>
+		</article>
+	</div>
+</body>
+</html>
