@@ -9,11 +9,16 @@ window.onload = function (evt) {
 	stage.context.arc(0, 0, stage.width, 0, Math.PI/2);
 	stage.context.stroke();
 	var BUTTONest = document.querySelector("#est");
-	BUTTONest.onclick = function(e) {
-			iv = setInterval(iteratePI, 1);
-	};
 	var BUTTONstop = document.querySelector("#stop");
+	BUTTONstop.disabled = true;
+	BUTTONest.onclick = function(e) {
+		BUTTONest.disabled = true;
+		BUTTONstop.disabled = false;
+		iv = setInterval(iteratePI, 1);
+	};
 	BUTTONstop.onclick = function(e) {
+		BUTTONstop.disabled = true;
+		BUTTONest.disabled = false;
 		clearInterval(iv);
 	};
 }
