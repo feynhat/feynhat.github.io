@@ -1,4 +1,4 @@
-var canv, mouseDown = false, N = 1e6, curves = [], rc, colors = [], stage,
+var canv, mouseDown = false, N = 1e4, curves = [], rc, colors = [], stage,
 	curve, L = [], prevX = -1, prevY = -1, beginX, beginY, TABLEinfo;
 
 window.onload = function(evt) {
